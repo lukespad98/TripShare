@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "681831738797",
+    "project_id": "tripshare-39823",
+    "storage_bucket": "tripshare-39823.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681831738797:android:cde022363e7892b73f8524",
+        "android_client_info": {
+          "package_name": "com.example.tripshare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX-Wo8lT5FiatlTubpf8j90F3qmrDSBYQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
