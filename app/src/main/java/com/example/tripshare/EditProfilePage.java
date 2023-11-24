@@ -21,6 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -199,9 +201,26 @@ public class EditProfilePage extends AppCompatActivity {
         });
     }
 
+    private ActivityResultLauncher<String[]> requestPermissionLauncher = registerForActivityResult(
+            new ActivityResultContracts.RequestMultiplePermissions(), result -> {
+                // Check if permissions were granted
+                if (result.containsValue(false)) {
+                    // Permission denied
+                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+                } else {
+                    showImagePicDialog();// Permissions granted, handle accordingly
+                }
+            });
+
+    private void requestPermissions() {
+        String[] permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_VIDEO, Manifest.permission.READ_MEDIA_IMAGES};
+        requestPermissionLauncher.launch(permissions);
+    }
     // checking storage permission ,if given then we can add something in our storage
     private Boolean checkStoragePermission() {
-        return ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
+        boolean result = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) == (PackageManager.PERMISSION_GRANTED);
+        boolean result1 = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_VIDEO) == (PackageManager.PERMISSION_GRANTED);
+        return result && result1;
     }
 
     // requesting for storage permission
@@ -212,8 +231,7 @@ public class EditProfilePage extends AppCompatActivity {
     // checking camera permission ,if given then we can click image using our camera
     private Boolean checkCameraPermission() {
         boolean result = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == (PackageManager.PERMISSION_GRANTED);
-        boolean result1 = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
-        return result && result1;
+        return result;
     }
 
     // requesting for camera permission if not given
@@ -368,13 +386,13 @@ public class EditProfilePage extends AppCompatActivity {
                 // if access is not given then we will request for permission
                 if (which == 0) {
                     if (!checkCameraPermission()) {
-                        requestCameraPermission();
+                        requestPermissions();
                     } else {
                         pickFromCamera();
                     }
                 } else if (which == 1) {
                     if (!checkStoragePermission()) {
-                        requestStoragePermission();
+                        requestPermissions();
                     } else {
                         pickFromGallery();
                     }
