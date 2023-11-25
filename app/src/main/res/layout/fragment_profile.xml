@@ -38,6 +38,7 @@
                     android:layout_marginStart="20dp"
                     android:background="@color/colorPrimary"
                     android:padding="5dp"
+                    android:src="@drawable/ic_images"
                     android:contentDescription="TODO" />
 
                 <LinearLayout
@@ -79,6 +80,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
+        android:src="@drawable/ic_edit_white"
         android:importantForAccessibility="no" />
 
 </RelativeLayout>

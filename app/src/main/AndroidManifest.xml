@@ -19,6 +19,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">
         <activity
+            android:name=".PostDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PostLikedByActivity"
+            android:exported="false" />
+        <activity
             android:name=".EditProfilePage"
             android:exported="false" />
         <activity android:name=".DashboardActivity" />
