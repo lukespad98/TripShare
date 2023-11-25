@@ -407,6 +407,7 @@ public class EditProfilePage extends AppCompatActivity {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == IMAGEPICK_GALLERY_REQUEST) {
                 imageuri = data.getData();
+                System.out.println("IMAGE URI: " + imageuri);
                 uploadProfileCoverPhoto(imageuri);
             }
             if (requestCode == IMAGE_PICKCAMERA_REQUEST) {
@@ -470,6 +471,7 @@ public class EditProfilePage extends AppCompatActivity {
 
         // We are taking the filepath as storagepath + firebaseauth.getUid()+".png"
         String filepathname = storagepath + "" + profileOrCoverPhoto + "_" + firebaseUser.getUid();
+        System.out.println("FILE PATH NAME" + filepathname);
         StorageReference storageReference1 = storageReference.child(filepathname);
         storageReference1.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
