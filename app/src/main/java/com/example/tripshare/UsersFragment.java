@@ -58,6 +58,7 @@ public class UsersFragment extends Fragment {
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
+
         return fragment;
     }
     private void getAllUsers() {
@@ -96,6 +97,13 @@ public class UsersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_users, container, false);
+        View view = inflater.inflate(R.layout.fragment_users, container, false);
+        recyclerView = view.findViewById(R.id.recyclep);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        usersList = new ArrayList<>();
+        firebaseAuth = FirebaseAuth.getInstance();
+        getAllUsers();
+        return view;
     }
 }
