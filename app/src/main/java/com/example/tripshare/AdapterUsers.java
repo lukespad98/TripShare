@@ -44,6 +44,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
         String userImage = list.get(position).getImage();
         String username = list.get(position).getName();
         String usermail = list.get(position).getEmail();
+
         holder.name.setText(username);
         holder.email.setText(usermail);
         try {

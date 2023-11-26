@@ -2,16 +2,19 @@ package com.example.tripshare;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -24,7 +27,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,6 +46,9 @@ public class ProfileFragment extends Fragment {
     RecyclerView postrecycle;
     FloatingActionButton fab;
     ProgressDialog pd;
+    List<ModelPost> posts;
+    AdapterPosts adapterPosts;
+    String uid;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -65,7 +74,10 @@ public class ProfileFragment extends Fragment {
         pd = new ProgressDialog(getActivity());
         pd.setCanceledOnTouchOutside(false);
         Query query = databaseReference.orderByChild("email").equalTo(firebaseUser.getEmail());
-
+        postrecycle = view.findViewById(R.id.recyclerposts);
+        posts = new ArrayList<>();
+        loadMyPosts();
+        pd.setCanceledOnTouchOutside(false);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -100,7 +112,33 @@ public class ProfileFragment extends Fragment {
         });
         return view;
     }
+    private void loadMyPosts() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        postrecycle.setLayoutManager(layoutManager);
 
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Posts");
+        Query query = databaseReference.orderByChild("uid").equalTo(uid);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                posts.clear();
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    ModelPost modelPost = dataSnapshot1.getValue(ModelPost.class);
+                    posts.add(modelPost);
+                    adapterPosts = new AdapterPosts(getActivity(), posts);
+                    postrecycle.setAdapter(adapterPosts);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
