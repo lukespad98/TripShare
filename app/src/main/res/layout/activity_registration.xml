@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,11 +14,13 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="50dp"
+        android:background="#43899D"
         android:gravity="center"
         android:text="Sign Up Here"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorWhite"
         android:textSize="28sp"
         android:textStyle="bold|italic" />
+
 
     <TextView
         android:id="@+id/names"
@@ -27,7 +30,8 @@
         android:layout_marginStart="35dp"
         android:layout_marginTop="120dp"
         android:text="Name"
-        android:textColor="@color/colorBlack" />
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold|italic"/>
 
     <EditText
         android:id="@+id/register_name"
@@ -50,7 +54,8 @@
         android:layout_marginStart="35dp"
         android:layout_marginTop="10dp"
         android:text="Email"
-        android:textColor="@color/colorBlack" />
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold|italic"/>
 
     <EditText
         android:id="@+id/register_email"
@@ -74,7 +79,8 @@
         android:layout_marginStart="35dp"
         android:layout_marginTop="10dp"
         android:text="Password"
-        android:textColor="@color/colorBlack" />
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold|italic"/>
 
     <EditText
         android:id="@+id/register_password"
@@ -101,6 +107,7 @@
         android:text="Create Account"
         android:textAllCaps="false"
         android:textColor="@android:color/background_light"
+        android:background="#43899D"
         android:textSize="24sp" />
 
     <TextView
@@ -112,10 +119,17 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="23dp"
-        android:text=" Already Have a Account?Sign In"
+        android:text=" Already Have a Account? \nSign In"
         android:textAlignment="center"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorPrimary"
         android:textSize="17sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="85dp"
+        android:layout_height="152dp"
+        app:srcCompat="@drawable/tripsharelogo" />
 
 </RelativeLayout>
