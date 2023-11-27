@@ -48,7 +48,9 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20sp"
             android:text="Upload"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:background="#43899D"
+            />
     </LinearLayout>
 
 </ScrollView>
