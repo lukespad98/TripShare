@@ -16,7 +16,7 @@
             android:id="@+id/ptitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Title"
+            android:hint="Enter Trip Location"
             android:minHeight="80dp"
             android:padding="10dp"
             android:singleLine="true" />
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20sp"
-            android:text="Upload"
+            android:text="Post"
             android:textAlignment="center"
             android:background="#43899D"
             />

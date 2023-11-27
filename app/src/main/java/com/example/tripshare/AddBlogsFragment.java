@@ -32,6 +32,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -76,6 +77,7 @@ public class AddBlogsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         View view = inflater.inflate(R.layout.fragment_add_blogs, container, false);
 
         title = view.findViewById(R.id.ptitle);
@@ -96,7 +98,39 @@ public class AddBlogsFragment extends Fragment {
                     name = dataSnapshot1.child("name").getValue(String.class);
                     email = "" + dataSnapshot1.child("email").getValue(String.class);
                     dp = "" + dataSnapshot1.child("image").getValue(String.class);
+                    System.out.println("User Name: " + name + "User email: " + email);
+                    System.out.println("Firebase user: " + firebaseUser);
                 }
+                System.out.println("Post name: " + name + "Post email: " + email);
+                upload.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String titl = "" + title.getText().toString().trim();
+                        String description = "" + des.getText().toString().trim();
+
+                        // If empty set error
+                        if (TextUtils.isEmpty(titl)) {
+                            title.setError("Title Cant be empty");
+                            Toast.makeText(getContext(), "Title can't be left empty", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
+                        // If empty set error
+                        if (TextUtils.isEmpty(description)) {
+                            des.setError("Description Cant be empty");
+                            Toast.makeText(getContext(), "Description can't be left empty", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
+                        // If empty show error
+                        if (imageuri == null) {
+                            Toast.makeText(getContext(), "Select an Image", Toast.LENGTH_LONG).show();
+                            return;
+                        } else {
+                            uploadData(titl, description);
+                        }
+                    }
+                });
             }
 
             @Override
@@ -118,35 +152,7 @@ public class AddBlogsFragment extends Fragment {
         });
 
         // Now we will upload out blog
-        upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String titl = "" + title.getText().toString().trim();
-                String description = "" + des.getText().toString().trim();
 
-                // If empty set error
-                if (TextUtils.isEmpty(titl)) {
-                    title.setError("Title Cant be empty");
-                    Toast.makeText(getContext(), "Title can't be left empty", Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-                // If empty set error
-                if (TextUtils.isEmpty(description)) {
-                    des.setError("Description Cant be empty");
-                    Toast.makeText(getContext(), "Description can't be left empty", Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-                // If empty show error
-                if (imageuri == null) {
-                    Toast.makeText(getContext(), "Select an Image", Toast.LENGTH_LONG).show();
-                    return;
-                } else {
-                    uploadData(titl, description);
-                }
-            }
-        });
         return view;
     }
 

@@ -152,9 +152,9 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.tripshare.Ada
 
     private void showMoreOptions(ImageButton more, String uid, String myuid, final String pid, final String image) {
         PopupMenu popupMenu = new PopupMenu(context, more, Gravity.END);
-        if (uid == myuid) {
-            popupMenu.getMenu().add(Menu.NONE, 0, 0, "DELETE");
-        }
+
+        popupMenu.getMenu().add(Menu.NONE, 0, 0, "Delete Post");
+
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
