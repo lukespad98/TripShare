@@ -11,10 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Edit Profile Data"
+        android:text="Edit Profile Page"
         android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="26sp" />
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="26sp"
+        android:textStyle="italic|bold" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/setting_profile_image"
@@ -31,8 +32,10 @@
         android:layout_marginTop="20dp"
         android:text="Update Profile Pic"
         android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="20sp" />
+        android:textColor="@color/colorBlack"
+        android:background="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="italic|bold"/>
 
     <TextView
         android:id="@+id/editname"
@@ -41,8 +44,11 @@
         android:layout_marginTop="20dp"
         android:text="Update Name"
         android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="20sp" />
+        android:textColor="@color/colorBlack"
+        android:textSize="20sp"
+        android:background="@color/colorPrimary"
+        android:textStyle="italic|bold"
+        />
 
     <TextView
         android:id="@+id/changepassword"
@@ -51,7 +57,10 @@
         android:layout_marginTop="20dp"
         android:text="Change Password "
         android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textColor="@color/colorBlack"
+        android:background="@color/colorPrimary"
+        android:textStyle="italic|bold"
+        />
 
 </LinearLayout>
