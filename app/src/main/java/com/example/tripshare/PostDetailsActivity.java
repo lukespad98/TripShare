@@ -283,16 +283,16 @@ public class PostDetailsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    String ptitle = dataSnapshot1.child("title").getValue().toString();
-                    String descriptions = dataSnapshot1.child("description").getValue().toString();
-                    uimage = dataSnapshot1.child("uimage").getValue().toString();
-                    hisdp = dataSnapshot1.child("udp").getValue().toString();
-                    // hisuid = dataSnapshot1.child("uid").getValue().toString();
-                    String uemail = dataSnapshot1.child("uemail").getValue().toString();
-                    hisname = dataSnapshot1.child("uname").getValue().toString();
-                    ptime = dataSnapshot1.child("ptime").getValue().toString();
-                    plike = dataSnapshot1.child("plike").getValue().toString();
-                    String commentcount = dataSnapshot1.child("pcomments").getValue().toString();
+                    String ptitle = dataSnapshot1.child("title").getValue(String.class);
+                    String descriptions = dataSnapshot1.child("description").getValue(String.class);
+                    uimage = dataSnapshot1.child("uimage").getValue(String.class);
+                    hisdp = dataSnapshot1.child("udp").getValue(String.class);
+                    hisuid = dataSnapshot1.child("uid").getValue(String.class);
+                    String uemail = dataSnapshot1.child("uemail").getValue(String.class);
+                    hisname = dataSnapshot1.child("uname").getValue(String.class);
+                    ptime = dataSnapshot1.child("ptime").getValue(String.class);
+                    plike = dataSnapshot1.child("plike").getValue(String.class);
+                    String commentcount = dataSnapshot1.child("pcomments").getValue(String.class);
                     Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
                     calendar.setTimeInMillis(Long.parseLong(ptime));
                     String timedate = DateFormat.format("dd/MM/yyyy hh:mm aa", calendar).toString();
